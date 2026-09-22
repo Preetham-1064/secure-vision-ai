@@ -11,15 +11,21 @@ Data Engineer responsibilities:
 - Detect duplicate images
 - Check train/test data leakage
 - Generate data quality audit report
-- Prepare train/test data
+- Create reproducible train/validation/test splits
+- Normalize image pixels
+- Provide ML-ready data
+- Save preprocessing metadata
 """
 
 from pathlib import Path
 import pickle
 import hashlib
+import json
 
 import numpy as np
 import pandas as pd
+
+from sklearn.model_selection import train_test_split
 
 
 # ==========================================================
@@ -38,6 +44,14 @@ PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 
 REPORT_PATH = (
     PROCESSED_DIR / "data_quality_report.csv"
+)
+
+CONFIG_PATH = (
+    PROCESSED_DIR / "preprocessing_config.json"
+)
+
+SPLIT_PATH = (
+    PROCESSED_DIR / "dataset_split_indices.csv"
 )
 
 
@@ -63,6 +77,10 @@ NUM_CLASSES = 10
 IMAGE_HEIGHT = 32
 IMAGE_WIDTH = 32
 IMAGE_CHANNELS = 3
+
+RANDOM_STATE = 42
+
+VALIDATION_SIZE = 0.10
 
 
 # ==========================================================
@@ -144,19 +162,16 @@ def validate_data(images, labels, dataset_name):
     print(f"Label shape       : {labels.shape}")
     print(f"Data type         : {images.dtype}")
 
-    # Missing values
     missing_values = np.isnan(images).sum()
 
     print(f"Missing values    : {missing_values}")
 
-    # Pixel range
     min_pixel = images.min()
     max_pixel = images.max()
 
     print(f"Minimum pixel     : {min_pixel}")
     print(f"Maximum pixel     : {max_pixel}")
 
-    # Labels
     unique_labels = np.unique(labels)
 
     print(f"Unique labels     : {unique_labels}")
@@ -169,7 +184,6 @@ def validate_data(images, labels, dataset_name):
 
     print(f"Invalid labels    : {len(invalid_labels)}")
 
-    # Expected sample count
     expected_samples = (
         50000
         if dataset_name == "TRAIN"
@@ -366,6 +380,364 @@ def reshape_images(images):
 
 
 # ==========================================================
+# NORMALIZE IMAGES
+# ==========================================================
+
+def normalize_images(images):
+    """
+    Normalize image pixel values from [0, 255]
+    to [0, 1].
+
+    Output dtype:
+        float32
+    """
+
+    images = images.astype(
+        np.float32
+    )
+
+    images = images / 255.0
+
+    return images
+
+
+# ==========================================================
+# CREATE TRAIN / VALIDATION SPLIT
+# ==========================================================
+
+def create_train_validation_split(
+    images,
+    labels
+):
+    """
+    Create a reproducible stratified train/validation split.
+
+    Training data:
+        90%
+
+    Validation data:
+        10%
+
+    Test data is never passed into this function.
+    """
+
+    (
+        X_train,
+        X_validation,
+        y_train,
+        y_validation
+    ) = train_test_split(
+        images,
+        labels,
+        test_size=VALIDATION_SIZE,
+        random_state=RANDOM_STATE,
+        stratify=labels
+    )
+
+    return (
+        X_train,
+        X_validation,
+        y_train,
+        y_validation
+    )
+
+
+# ==========================================================
+# CREATE SPLIT INDICES
+# ==========================================================
+
+def create_split_indices(labels):
+    """
+    Create reproducible train/validation indices.
+
+    This keeps a lightweight record of the split
+    without saving the large image arrays.
+    """
+
+    indices = np.arange(len(labels))
+
+    train_indices, validation_indices = (
+        train_test_split(
+            indices,
+            test_size=VALIDATION_SIZE,
+            random_state=RANDOM_STATE,
+            stratify=labels
+        )
+    )
+
+    return (
+        train_indices,
+        validation_indices
+    )
+
+
+# ==========================================================
+# SAVE SPLIT METADATA
+# ==========================================================
+
+def save_split_metadata(
+    train_indices,
+    validation_indices,
+    test_size
+):
+    """
+    Save train/validation/test split information
+    as a lightweight CSV.
+    """
+
+    train_records = pd.DataFrame({
+        "source_index": train_indices,
+        "split": "train"
+    })
+
+    validation_records = pd.DataFrame({
+        "source_index": validation_indices,
+        "split": "validation"
+    })
+
+    test_indices = np.arange(test_size)
+
+    test_records = pd.DataFrame({
+        "source_index": test_indices,
+        "split": "test"
+    })
+
+    split_records = pd.concat(
+        [
+            train_records,
+            validation_records,
+            test_records
+        ],
+        ignore_index=True
+    )
+
+    split_records.to_csv(
+        SPLIT_PATH,
+        index=False
+    )
+
+    print(
+        f"\nSplit metadata saved to:\n"
+        f"{SPLIT_PATH}"
+    )
+
+
+# ==========================================================
+# SAVE PREPROCESSING CONFIGURATION
+# ==========================================================
+
+def save_preprocessing_config():
+    """Save preprocessing settings for reproducibility."""
+
+    config = {
+        "dataset": "CIFAR-10",
+        "image_height": IMAGE_HEIGHT,
+        "image_width": IMAGE_WIDTH,
+        "image_channels": IMAGE_CHANNELS,
+        "number_of_classes": NUM_CLASSES,
+        "class_names": CLASS_NAMES,
+        "normalization": {
+            "method": "divide_by_255",
+            "input_range": [0, 255],
+            "output_range": [0.0, 1.0],
+            "output_dtype": "float32"
+        },
+        "split": {
+            "training_samples": 45000,
+            "validation_samples": 5000,
+            "test_samples": 10000,
+            "validation_size": VALIDATION_SIZE,
+            "stratified": True,
+            "random_state": RANDOM_STATE
+        },
+        "leakage_prevention": {
+            "duplicate_check": "MD5 exact pixel hash",
+            "train_test_overlap_check": True,
+            "test_set_used_for_split": False
+        }
+    }
+
+    with open(
+        CONFIG_PATH,
+        "w",
+        encoding="utf-8"
+    ) as file:
+
+        json.dump(
+            config,
+            file,
+            indent=4
+        )
+
+    print(
+        f"Preprocessing configuration saved to:\n"
+        f"{CONFIG_PATH}"
+    )
+
+
+# ==========================================================
+# PREPARE ML-READY DATA
+# ==========================================================
+
+def prepare_ml_data(
+    X_train,
+    y_train,
+    X_test,
+    y_test
+):
+    """
+    Create ML-ready train, validation and test datasets.
+
+    Steps:
+        1. Split training data.
+        2. Reshape images.
+        3. Normalize pixel values.
+    """
+
+    (
+        X_train,
+        X_validation,
+        y_train,
+        y_validation
+    ) = create_train_validation_split(
+        X_train,
+        y_train
+    )
+
+    # Reshape
+    X_train = reshape_images(X_train)
+    X_validation = reshape_images(X_validation)
+    X_test = reshape_images(X_test)
+
+    # Normalize
+    X_train = normalize_images(X_train)
+    X_validation = normalize_images(X_validation)
+    X_test = normalize_images(X_test)
+
+    return (
+        X_train,
+        X_validation,
+        X_test,
+        y_train,
+        y_validation,
+        y_test
+    )
+
+
+# ==========================================================
+# VALIDATE PROCESSED DATA
+# ==========================================================
+
+def validate_processed_data(
+    X_train,
+    X_validation,
+    X_test,
+    y_train,
+    y_validation,
+    y_test
+):
+    """Validate the final ML-ready datasets."""
+
+    print(f"\n{'=' * 60}")
+    print("ML-READY DATA VALIDATION")
+    print(f"{'=' * 60}")
+
+    print(
+        f"Training data     : "
+        f"{X_train.shape}"
+    )
+
+    print(
+        f"Validation data   : "
+        f"{X_validation.shape}"
+    )
+
+    print(
+        f"Test data         : "
+        f"{X_test.shape}"
+    )
+
+    print(
+        f"Training labels   : "
+        f"{y_train.shape}"
+    )
+
+    print(
+        f"Validation labels : "
+        f"{y_validation.shape}"
+    )
+
+    print(
+        f"Test labels       : "
+        f"{y_test.shape}"
+    )
+
+    print(
+        f"\nTraining range    : "
+        f"{X_train.min():.4f} - "
+        f"{X_train.max():.4f}"
+    )
+
+    print(
+        f"Validation range  : "
+        f"{X_validation.min():.4f} - "
+        f"{X_validation.max():.4f}"
+    )
+
+    print(
+        f"Test range        : "
+        f"{X_test.min():.4f} - "
+        f"{X_test.max():.4f}"
+    )
+
+    # Shape checks
+    expected_shape = (
+        IMAGE_HEIGHT,
+        IMAGE_WIDTH,
+        IMAGE_CHANNELS
+    )
+
+    if X_train.shape[1:] != expected_shape:
+        raise ValueError(
+            "Training image shape is incorrect."
+        )
+
+    if X_validation.shape[1:] != expected_shape:
+        raise ValueError(
+            "Validation image shape is incorrect."
+        )
+
+    if X_test.shape[1:] != expected_shape:
+        raise ValueError(
+            "Test image shape is incorrect."
+        )
+
+    # Range checks
+    if (
+        X_train.min() < 0
+        or X_train.max() > 1
+        or X_validation.min() < 0
+        or X_validation.max() > 1
+        or X_test.min() < 0
+        or X_test.max() > 1
+    ):
+        raise ValueError(
+            "Normalized pixel values are outside "
+            "the expected [0, 1] range."
+        )
+
+    # Data type
+    if X_train.dtype != np.float32:
+        raise ValueError(
+            "Training data must use float32."
+        )
+
+    print(
+        "\nML-ready data validation : PASSED"
+    )
+
+
+# ==========================================================
 # GENERATE DATA QUALITY REPORT
 # ==========================================================
 
@@ -378,9 +750,7 @@ def generate_quality_report(
     test_duplicates,
     leakage_count
 ):
-    """
-    Generate a CSV data-quality audit report.
-    """
+    """Generate a CSV data-quality audit report."""
 
     PROCESSED_DIR.mkdir(
         parents=True,
@@ -388,10 +758,6 @@ def generate_quality_report(
     )
 
     report_rows = []
-
-    # ------------------------------------------------------
-    # Dataset-level checks
-    # ------------------------------------------------------
 
     report_rows.extend([
         {
@@ -518,10 +884,6 @@ def generate_quality_report(
         },
     ])
 
-    # ------------------------------------------------------
-    # Class distribution
-    # ------------------------------------------------------
-
     for label, values in train_distribution.items():
 
         report_rows.append({
@@ -580,8 +942,13 @@ def main():
     # Load data
     # ------------------------------------------------------
 
-    X_train, y_train = load_training_data()
-    X_test, y_test = load_test_data()
+    X_train_raw, y_train_raw = (
+        load_training_data()
+    )
+
+    X_test_raw, y_test_raw = (
+        load_test_data()
+    )
 
     print("\nRaw data loaded successfully.")
 
@@ -590,14 +957,14 @@ def main():
     # ------------------------------------------------------
 
     train_info = validate_data(
-        X_train,
-        y_train,
+        X_train_raw,
+        y_train_raw,
         "TRAIN"
     )
 
     test_info = validate_data(
-        X_test,
-        y_test,
+        X_test_raw,
+        y_test_raw,
         "TEST"
     )
 
@@ -606,12 +973,12 @@ def main():
     # ------------------------------------------------------
 
     train_distribution = check_class_distribution(
-        y_train,
+        y_train_raw,
         "TRAIN"
     )
 
     test_distribution = check_class_distribution(
-        y_test,
+        y_test_raw,
         "TEST"
     )
 
@@ -621,14 +988,14 @@ def main():
 
     train_hashes, train_duplicates = (
         check_duplicates(
-            X_train,
+            X_train_raw,
             "TRAIN"
         )
     )
 
     test_hashes, test_duplicates = (
         check_duplicates(
-            X_test,
+            X_test_raw,
             "TEST"
         )
     )
@@ -639,11 +1006,11 @@ def main():
 
     leakage_count = check_train_test_leakage(
         train_hashes,
-        X_test
+        X_test_raw
     )
 
     # ------------------------------------------------------
-    # Generate audit report
+    # Generate quality report
     # ------------------------------------------------------
 
     generate_quality_report(
@@ -657,72 +1024,97 @@ def main():
     )
 
     # ------------------------------------------------------
-    # Reshape images
+    # Create split metadata
     # ------------------------------------------------------
 
-    X_train = reshape_images(X_train)
-    X_test = reshape_images(X_test)
-
-    print("\nAfter reshaping:")
-
-    print(
-        "Training images:",
-        X_train.shape
+    (
+        train_indices,
+        validation_indices
+    ) = create_split_indices(
+        y_train_raw
     )
 
-    print(
-        "Test images:",
-        X_test.shape
+    save_split_metadata(
+        train_indices,
+        validation_indices,
+        len(y_test_raw)
     )
 
     # ------------------------------------------------------
-    # Class mapping
+    # Save preprocessing configuration
     # ------------------------------------------------------
 
-    print("\nClass mapping:")
-
-    for index, class_name in enumerate(CLASS_NAMES):
-
-        print(
-            f"{index}: {class_name}"
-        )
+    save_preprocessing_config()
 
     # ------------------------------------------------------
-    # Final summary
+    # Prepare ML-ready data
+    # ------------------------------------------------------
+
+    (
+        X_train,
+        X_validation,
+        X_test,
+        y_train,
+        y_validation,
+        y_test
+    ) = prepare_ml_data(
+        X_train_raw,
+        y_train_raw,
+        X_test_raw,
+        y_test_raw
+    )
+
+    # ------------------------------------------------------
+    # Validate processed data
+    # ------------------------------------------------------
+
+    validate_processed_data(
+        X_train,
+        X_validation,
+        X_test,
+        y_train,
+        y_validation,
+        y_test
+    )
+
+    # ------------------------------------------------------
+    # Final information
     # ------------------------------------------------------
 
     print(f"\n{'=' * 60}")
-    print("DATA QUALITY SUMMARY")
+    print("FINAL DATASET SUMMARY")
     print(f"{'=' * 60}")
 
     print(
-        f"Training duplicates : {train_duplicates}"
+        f"Training samples   : {len(X_train)}"
     )
 
     print(
-        f"Test duplicates     : {test_duplicates}"
+        f"Validation samples : {len(X_validation)}"
     )
 
     print(
-        f"Train/Test overlap  : {leakage_count}"
+        f"Test samples       : {len(X_test)}"
     )
 
-    if (
-        train_duplicates == 0
-        and test_duplicates == 0
-        and leakage_count == 0
-    ):
-        print(
-            "\nOverall data quality status : PASSED"
-        )
-    else:
-        print(
-            "\nOverall data quality status : REVIEW REQUIRED"
-        )
+    print(
+        f"Image dimensions   : "
+        f"{IMAGE_HEIGHT} x "
+        f"{IMAGE_WIDTH} x "
+        f"{IMAGE_CHANNELS}"
+    )
 
     print(
-        "\nData preprocessing pipeline "
-        "completed successfully."
+        "Pixel range        : 0.0 - 1.0"
+    )
+
+    print(
+        f"Random state       : {RANDOM_STATE}"
+    )
+
+    print(
+        "\nData Engineer preprocessing "
+        "pipeline completed successfully."
     )
 
 

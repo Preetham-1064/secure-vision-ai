@@ -1,0 +1,44 @@
+{
+    "dataset": "CIFAR-10",
+    "image_height": 32,
+    "image_width": 32,
+    "image_channels": 3,
+    "number_of_classes": 10,
+    "class_names": [
+        "airplane",
+        "automobile",
+        "bird",
+        "cat",
+        "deer",
+        "dog",
+        "frog",
+        "horse",
+        "ship",
+        "truck"
+    ],
+    "normalization": {
+        "method": "divide_by_255",
+        "input_range": [
+            0,
+            255
+        ],
+        "output_range": [
+            0.0,
+            1.0
+        ],
+        "output_dtype": "float32"
+    },
+    "split": {
+        "training_samples": 45000,
+        "validation_samples": 5000,
+        "test_samples": 10000,
+        "validation_size": 0.1,
+        "stratified": true,
+        "random_state": 42
+    },
+    "leakage_prevention": {
+        "duplicate_check": "MD5 exact pixel hash",
+        "train_test_overlap_check": true,
+        "test_set_used_for_split": false
+    }
+}
