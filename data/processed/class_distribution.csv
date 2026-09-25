@@ -1,0 +1,11 @@
+class_id,class_name,image_count,percentage
+0,airplane,5000,10.0
+1,automobile,5000,10.0
+2,bird,5000,10.0
+3,cat,5000,10.0
+4,deer,5000,10.0
+5,dog,5000,10.0
+6,frog,5000,10.0
+7,horse,5000,10.0
+8,ship,5000,10.0
+9,truck,5000,10.0
