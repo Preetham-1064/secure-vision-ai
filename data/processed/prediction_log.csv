@@ -2,3 +2,5 @@ model,predicted_class,predicted_index,confidence,latency_ms,true_class,correct
 baseline_cnn,frog,6,0.5568229556083679,6.911200005561113,cat,False
 baseline_cnn,frog,6,0.5568229556083679,8.017300046049058,cat,False
 resnet18,cat,3,0.11967078596353531,34.05169991310686,cat,True
+baseline_cnn,frog,6,0.5568230748176575,5.701699999917764,cat,False
+resnet18,airplane,0,0.1216338500380516,32.04749999986234,cat,False
