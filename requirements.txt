@@ -8,3 +8,4 @@ jupyter==1.1.1
 ipykernel==6.29.5
 Pillow==11.0.0
 gdown==5.2.0
+streamlit
