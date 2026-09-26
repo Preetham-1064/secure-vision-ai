@@ -132,6 +132,11 @@ def load_model(model_name):
             f"Model weights not found: {weight_path}"
         )
 
+    # Subclassed models (ResNet18) have no variables until built;
+    # Sequential models (Baseline CNN) are already built via their
+    # Input layer, so this is a no-op for them.
+    model.build(input_shape=(None, 32, 32, 3))
+
     model.load_weights(str(weight_path))
 
     return model
