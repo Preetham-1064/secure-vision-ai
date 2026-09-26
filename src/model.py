@@ -56,7 +56,7 @@ EPOCHS = 15
 BATCH_SIZE = 128
 LEARNING_RATE = 1e-3
 
-# CIFAR-10 per-channel mean/std (same values as the original PyTorch code)
+# CIFAR-10 per-channel mean/std
 MEAN = tf.constant([0.4914, 0.4822, 0.4465], dtype=tf.float32)
 STD = tf.constant([0.2470, 0.2435, 0.2616], dtype=tf.float32)
 
