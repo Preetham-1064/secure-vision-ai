@@ -59,6 +59,7 @@ data/raw/*
 
 # Ignore large model artifacts by default
 *.h5
+!models/*.weights.h5
 *.hdf5
 *.keras
 *.pth
