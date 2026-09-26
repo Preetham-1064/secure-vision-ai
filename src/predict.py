@@ -97,7 +97,7 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(
-    "SentriVision"
+    "SecureVision"
 )
 
 
@@ -142,13 +142,9 @@ def load_model(model_name):
         )
 
     # Build model variables before loading weights
-    model.build(
-        input_shape=(
-            None,
-            32,
-            32,
-            3
-        )
+    model(
+        tf.zeros((1, 32, 32, 3)),
+        training=False
     )
 
     model.load_weights(
