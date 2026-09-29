@@ -1,0 +1,2 @@
+model,split,sample_count,incorrect_predictions,total_cost,average_cost_per_sample
+baseline_cnn,test,10000,2025,2025.0,0.2025

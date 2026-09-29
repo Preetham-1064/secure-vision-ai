@@ -1,0 +1,11 @@
+class_index,class_name,sample_count,total_cost,average_cost
+0,airplane,500,47.0,0.094
+1,automobile,500,23.0,0.046
+2,bird,500,67.0,0.134
+3,cat,500,87.0,0.174
+4,deer,500,43.0,0.086
+5,dog,500,70.0,0.14
+6,frog,500,37.0,0.074
+7,horse,500,42.0,0.084
+8,ship,500,15.0,0.03
+9,truck,500,23.0,0.046
