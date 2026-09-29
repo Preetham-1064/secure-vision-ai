@@ -1,0 +1,97 @@
+table inference_latency
+	lineageTag: 1fb29411-4e71-4bd3-a47c-9fa18af4297a
+
+	column model
+		dataType: string
+		lineageTag: 776931ed-8b5c-4bda-b126-c382a60d8e7a
+		summarizeBy: none
+		sourceColumn: model
+
+		annotation SummarizationSetBy = Automatic
+
+	column samples
+		dataType: double
+		lineageTag: 5aeb95eb-05db-46ca-be18-82370e703c43
+		summarizeBy: sum
+		sourceColumn: samples
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_latency_ms
+		dataType: double
+		lineageTag: 1fe3d415-2254-4670-96d7-7079d88469ec
+		summarizeBy: sum
+		sourceColumn: average_latency_ms
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column median_latency_ms
+		dataType: double
+		lineageTag: 2e905cc6-5260-41ba-8d1e-f64017af2a49
+		summarizeBy: sum
+		sourceColumn: median_latency_ms
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column p95_latency_ms
+		dataType: double
+		lineageTag: 0bddbcae-9ab4-4c37-94e6-6ee2482fbfb3
+		summarizeBy: sum
+		sourceColumn: p95_latency_ms
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column min_latency_ms
+		dataType: double
+		lineageTag: b70481a2-8719-40a5-971e-9083a5b26db8
+		summarizeBy: sum
+		sourceColumn: min_latency_ms
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column max_latency_ms
+		dataType: double
+		lineageTag: e99fd1b4-acda-4d49-85e0-b25c8f935ea1
+		summarizeBy: sum
+		sourceColumn: max_latency_ms
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column throughput_images_per_sec
+		dataType: double
+		lineageTag: 0fbfe8a2-7c32-47a7-b9cf-4c479515b5d6
+		summarizeBy: sum
+		sourceColumn: throughput_images_per_sec
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition inference_latency = m
+		mode: import
+		source =
+				let
+									Source = Table.FromRows({
+				                    {"baseline_cnn", 500, 6.240061800694093, 6.168099993374199, 6.89874502713792, 5.6462999782525, 8.204300014767796, 160.25482309947125},
+				                    {"resnet18", 500, 33.783367800409906, 33.51125001790933, 35.33375500119291, 32.1943000308238, 52.92330001248047, 29.60036447248065}
+									}, {"model", "samples", "average_latency_ms", "median_latency_ms", "p95_latency_ms", "min_latency_ms", "max_latency_ms", "throughput_images_per_sec"}),
+									#"Changed Type" = Table.TransformColumnTypes(Source, {{"model", type text}, {"samples", type number}, {"average_latency_ms", type number}, {"median_latency_ms", type number}, {"p95_latency_ms", type number}, {"min_latency_ms", type number}, {"max_latency_ms", type number}, {"throughput_images_per_sec", type number}})
+								in
+									#"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

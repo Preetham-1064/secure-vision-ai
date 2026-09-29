@@ -1,0 +1,237 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "tbl_dq",
+  "position": {
+    "x": 39.8443579766537,
+    "y": 484.35797665369654,
+    "z": 6000,
+    "height": 220,
+    "width": 1000,
+    "tabOrder": -1001
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_report"
+                    }
+                  },
+                  "Property": "dataset"
+                }
+              },
+              "queryRef": "data_quality_report.dataset",
+              "nativeQueryRef": "dataset"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_report"
+                    }
+                  },
+                  "Property": "check"
+                }
+              },
+              "queryRef": "data_quality_report.check",
+              "nativeQueryRef": "check"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_report"
+                    }
+                  },
+                  "Property": "value"
+                }
+              },
+              "queryRef": "data_quality_report.value",
+              "nativeQueryRef": "value"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_report"
+                    }
+                  },
+                  "Property": "status"
+                }
+              },
+              "queryRef": "data_quality_report.status",
+              "nativeQueryRef": "status"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'A table'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Data Quality Report'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6a25d8c308ce7ac229ea",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_report"
+              }
+            },
+            "Property": "dataset"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e8df194236b80b27b39d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_report"
+              }
+            },
+            "Property": "check"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9db483b0138c953a6e89",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_report"
+              }
+            },
+            "Property": "value"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "97f947249d4e7a8e944c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_report"
+              }
+            },
+            "Property": "status"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

@@ -1,0 +1,349 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "tbl_lat",
+  "position": {
+    "x": 39.8443579766537,
+    "y": 131.98443579766538,
+    "z": 6000,
+    "height": 160,
+    "width": 1000,
+    "tabOrder": -1001
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inference_latency"
+                    }
+                  },
+                  "Property": "model"
+                }
+              },
+              "queryRef": "inference_latency.model",
+              "nativeQueryRef": "model"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inference_latency"
+                    }
+                  },
+                  "Property": "samples"
+                }
+              },
+              "queryRef": "inference_latency.samples",
+              "nativeQueryRef": "samples"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inference_latency"
+                    }
+                  },
+                  "Property": "average_latency_ms"
+                }
+              },
+              "queryRef": "inference_latency.average_latency_ms",
+              "nativeQueryRef": "average_latency_ms"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inference_latency"
+                    }
+                  },
+                  "Property": "median_latency_ms"
+                }
+              },
+              "queryRef": "inference_latency.median_latency_ms",
+              "nativeQueryRef": "median_latency_ms"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inference_latency"
+                    }
+                  },
+                  "Property": "p95_latency_ms"
+                }
+              },
+              "queryRef": "inference_latency.p95_latency_ms",
+              "nativeQueryRef": "p95_latency_ms"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inference_latency"
+                    }
+                  },
+                  "Property": "min_latency_ms"
+                }
+              },
+              "queryRef": "inference_latency.min_latency_ms",
+              "nativeQueryRef": "min_latency_ms"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inference_latency"
+                    }
+                  },
+                  "Property": "max_latency_ms"
+                }
+              },
+              "queryRef": "inference_latency.max_latency_ms",
+              "nativeQueryRef": "max_latency_ms"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inference_latency"
+                    }
+                  },
+                  "Property": "throughput_images_per_sec"
+                }
+              },
+              "queryRef": "inference_latency.throughput_images_per_sec",
+              "nativeQueryRef": "throughput_images_per_sec"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'A table'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Inference Latency Benchmark'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6c4fc215b9a0887b4e98",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "inference_latency"
+              }
+            },
+            "Property": "model"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b160d54b3c1158cb0170",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "inference_latency"
+              }
+            },
+            "Property": "samples"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a6beb20fb6902d32b122",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "inference_latency"
+              }
+            },
+            "Property": "average_latency_ms"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "38572eebb9202eae030d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "inference_latency"
+              }
+            },
+            "Property": "median_latency_ms"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2be915bd77b4ac034adb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "inference_latency"
+              }
+            },
+            "Property": "p95_latency_ms"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "260a92750cbba0dec703",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "inference_latency"
+              }
+            },
+            "Property": "min_latency_ms"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "69e89ff3a0656233ce13",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "inference_latency"
+              }
+            },
+            "Property": "max_latency_ms"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "db4e18a53d3e68b23268",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "inference_latency"
+              }
+            },
+            "Property": "throughput_images_per_sec"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

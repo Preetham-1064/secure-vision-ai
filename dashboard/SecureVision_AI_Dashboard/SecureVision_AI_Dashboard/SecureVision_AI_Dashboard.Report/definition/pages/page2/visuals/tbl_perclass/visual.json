@@ -1,0 +1,293 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "tbl_perclass",
+  "position": {
+    "x": 39.8443579766537,
+    "y": 139.45525291828795,
+    "z": 6000,
+    "height": 469.4163424124514,
+    "width": 449.49416342412451,
+    "tabOrder": -1001
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "per_class_metrics"
+                    }
+                  },
+                  "Property": "model"
+                }
+              },
+              "queryRef": "per_class_metrics.model",
+              "nativeQueryRef": "model"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "per_class_metrics"
+                    }
+                  },
+                  "Property": "class_name"
+                }
+              },
+              "queryRef": "per_class_metrics.class_name",
+              "nativeQueryRef": "class_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "per_class_metrics"
+                    }
+                  },
+                  "Property": "precision"
+                }
+              },
+              "queryRef": "per_class_metrics.precision",
+              "nativeQueryRef": "precision"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "per_class_metrics"
+                    }
+                  },
+                  "Property": "recall"
+                }
+              },
+              "queryRef": "per_class_metrics.recall",
+              "nativeQueryRef": "recall"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "per_class_metrics"
+                    }
+                  },
+                  "Property": "f1-score"
+                }
+              },
+              "queryRef": "per_class_metrics.f1-score",
+              "nativeQueryRef": "f1-score"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "per_class_metrics"
+                    }
+                  },
+                  "Property": "support"
+                }
+              },
+              "queryRef": "per_class_metrics.support",
+              "nativeQueryRef": "support"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'A table'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Per-Class Metrics (Test Set)'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "42733005556c570936b8",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "per_class_metrics"
+              }
+            },
+            "Property": "model"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9a8c6ea9c74c530b51da",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "per_class_metrics"
+              }
+            },
+            "Property": "class_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "49d6e0517354a7505080",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "per_class_metrics"
+              }
+            },
+            "Property": "precision"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "755e7975de4471b19951",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "per_class_metrics"
+              }
+            },
+            "Property": "recall"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ab4599fbe09eb18d61d6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "per_class_metrics"
+              }
+            },
+            "Property": "f1-score"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9fa6312130dec5820030",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "per_class_metrics"
+              }
+            },
+            "Property": "support"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

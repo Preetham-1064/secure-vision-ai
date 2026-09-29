@@ -1,0 +1,293 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "tbl_cost",
+  "position": {
+    "x": 39.8443579766537,
+    "y": 151.90661478599222,
+    "z": 6000,
+    "height": 220,
+    "width": 1000,
+    "tabOrder": -1001
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "cost_summary"
+                    }
+                  },
+                  "Property": "model"
+                }
+              },
+              "queryRef": "cost_summary.model",
+              "nativeQueryRef": "model"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "cost_summary"
+                    }
+                  },
+                  "Property": "split"
+                }
+              },
+              "queryRef": "cost_summary.split",
+              "nativeQueryRef": "split"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "cost_summary"
+                    }
+                  },
+                  "Property": "sample_count"
+                }
+              },
+              "queryRef": "cost_summary.sample_count",
+              "nativeQueryRef": "sample_count"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "cost_summary"
+                    }
+                  },
+                  "Property": "incorrect_predictions"
+                }
+              },
+              "queryRef": "cost_summary.incorrect_predictions",
+              "nativeQueryRef": "incorrect_predictions"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "cost_summary"
+                    }
+                  },
+                  "Property": "total_cost"
+                }
+              },
+              "queryRef": "cost_summary.total_cost",
+              "nativeQueryRef": "total_cost"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "cost_summary"
+                    }
+                  },
+                  "Property": "average_cost_per_sample"
+                }
+              },
+              "queryRef": "cost_summary.average_cost_per_sample",
+              "nativeQueryRef": "average_cost_per_sample"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'A table'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cost Analysis Summary'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "0156ddd25114ed174688",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "cost_summary"
+              }
+            },
+            "Property": "model"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "244eb9d37050b09a06da",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "cost_summary"
+              }
+            },
+            "Property": "split"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e6f842908b017e25babb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "cost_summary"
+              }
+            },
+            "Property": "sample_count"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f687408084ed9b6a5226",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "cost_summary"
+              }
+            },
+            "Property": "incorrect_predictions"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a7bc254bd80d96e06880",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "cost_summary"
+              }
+            },
+            "Property": "total_cost"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "599e59e0d2152780a0d4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "cost_summary"
+              }
+            },
+            "Property": "average_cost_per_sample"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

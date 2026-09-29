@@ -1,0 +1,321 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "tbl_overview_perf",
+  "position": {
+    "x": 39.8443579766537,
+    "y": 209.1828793774319,
+    "z": 6000,
+    "height": 164.35797665369651,
+    "width": 677.35408560311282,
+    "tabOrder": -1001
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_performance_summary"
+                    }
+                  },
+                  "Property": "model"
+                }
+              },
+              "queryRef": "model_performance_summary.model",
+              "nativeQueryRef": "model"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_performance_summary"
+                    }
+                  },
+                  "Property": "split"
+                }
+              },
+              "queryRef": "model_performance_summary.split",
+              "nativeQueryRef": "split"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_performance_summary"
+                    }
+                  },
+                  "Property": "sample_count"
+                }
+              },
+              "queryRef": "model_performance_summary.sample_count",
+              "nativeQueryRef": "sample_count"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_performance_summary"
+                    }
+                  },
+                  "Property": "accuracy"
+                }
+              },
+              "queryRef": "model_performance_summary.accuracy",
+              "nativeQueryRef": "accuracy"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_performance_summary"
+                    }
+                  },
+                  "Property": "macro_precision"
+                }
+              },
+              "queryRef": "model_performance_summary.macro_precision",
+              "nativeQueryRef": "macro_precision"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_performance_summary"
+                    }
+                  },
+                  "Property": "macro_recall"
+                }
+              },
+              "queryRef": "model_performance_summary.macro_recall",
+              "nativeQueryRef": "macro_recall"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_performance_summary"
+                    }
+                  },
+                  "Property": "macro_f1"
+                }
+              },
+              "queryRef": "model_performance_summary.macro_f1",
+              "nativeQueryRef": "macro_f1"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'A table'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Model Performance Summary'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "833265ea852ae72be2a7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "model_performance_summary"
+              }
+            },
+            "Property": "model"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b9e3467539be6de14384",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "model_performance_summary"
+              }
+            },
+            "Property": "split"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f672e06d8e8c0824ae8d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "model_performance_summary"
+              }
+            },
+            "Property": "sample_count"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8945528a718409b1d020",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "model_performance_summary"
+              }
+            },
+            "Property": "accuracy"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "900a7f37a4501a6c1711",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "model_performance_summary"
+              }
+            },
+            "Property": "macro_precision"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e2c061daad376645ac7e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "model_performance_summary"
+              }
+            },
+            "Property": "macro_recall"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ca8271e55ede98d697b0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "model_performance_summary"
+              }
+            },
+            "Property": "macro_f1"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

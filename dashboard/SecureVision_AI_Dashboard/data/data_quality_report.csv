@@ -1,0 +1,32 @@
+dataset,check,value,status
+TRAIN,Sample Count,50000,PASS
+TEST,Sample Count,10000,PASS
+TRAIN,Missing Values,0,PASS
+TEST,Missing Values,0,PASS
+TRAIN,Pixel Range,0-255,PASS
+TEST,Pixel Range,0-255,PASS
+TRAIN,Invalid Labels,0,PASS
+TEST,Invalid Labels,0,PASS
+TRAIN,Duplicate Images,0,PASS
+TEST,Duplicate Images,0,PASS
+TRAIN/TEST,Exact Image Overlap,0,PASS
+TRAIN,Class Distribution - airplane,5000 (10.00%),INFO
+TRAIN,Class Distribution - automobile,5000 (10.00%),INFO
+TRAIN,Class Distribution - bird,5000 (10.00%),INFO
+TRAIN,Class Distribution - cat,5000 (10.00%),INFO
+TRAIN,Class Distribution - deer,5000 (10.00%),INFO
+TRAIN,Class Distribution - dog,5000 (10.00%),INFO
+TRAIN,Class Distribution - frog,5000 (10.00%),INFO
+TRAIN,Class Distribution - horse,5000 (10.00%),INFO
+TRAIN,Class Distribution - ship,5000 (10.00%),INFO
+TRAIN,Class Distribution - truck,5000 (10.00%),INFO
+TEST,Class Distribution - airplane,1000 (10.00%),INFO
+TEST,Class Distribution - automobile,1000 (10.00%),INFO
+TEST,Class Distribution - bird,1000 (10.00%),INFO
+TEST,Class Distribution - cat,1000 (10.00%),INFO
+TEST,Class Distribution - deer,1000 (10.00%),INFO
+TEST,Class Distribution - dog,1000 (10.00%),INFO
+TEST,Class Distribution - frog,1000 (10.00%),INFO
+TEST,Class Distribution - horse,1000 (10.00%),INFO
+TEST,Class Distribution - ship,1000 (10.00%),INFO
+TEST,Class Distribution - truck,1000 (10.00%),INFO

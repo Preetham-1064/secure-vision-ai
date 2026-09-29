@@ -1,0 +1,25 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_ProTooling = ["DevMode"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ['model_performance_summary', 'per_class_metrics', 'inference_latency', 'class_distribution', 'cost_summary', 'threshold_summary', 'anomaly_summary', 'data_quality_report']
+
+ref table model_performance_summary
+ref table per_class_metrics
+ref table inference_latency
+ref table class_distribution
+ref table cost_summary
+ref table threshold_summary
+ref table anomaly_summary
+ref table data_quality_report
+
+ref cultureInfo en-US
+

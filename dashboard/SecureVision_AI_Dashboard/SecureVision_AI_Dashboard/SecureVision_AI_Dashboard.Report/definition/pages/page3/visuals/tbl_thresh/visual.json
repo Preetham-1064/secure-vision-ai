@@ -1,0 +1,349 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "tbl_thresh",
+  "position": {
+    "x": 39.8443579766537,
+    "y": 420.85603112840471,
+    "z": 6000,
+    "height": 200,
+    "width": 1000,
+    "tabOrder": -1001
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_summary"
+                    }
+                  },
+                  "Property": "model"
+                }
+              },
+              "queryRef": "threshold_summary.model",
+              "nativeQueryRef": "model"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_summary"
+                    }
+                  },
+                  "Property": "optimal_threshold"
+                }
+              },
+              "queryRef": "threshold_summary.optimal_threshold",
+              "nativeQueryRef": "optimal_threshold"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_summary"
+                    }
+                  },
+                  "Property": "coverage"
+                }
+              },
+              "queryRef": "threshold_summary.coverage",
+              "nativeQueryRef": "coverage"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_summary"
+                    }
+                  },
+                  "Property": "review_rate"
+                }
+              },
+              "queryRef": "threshold_summary.review_rate",
+              "nativeQueryRef": "review_rate"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_summary"
+                    }
+                  },
+                  "Property": "accuracy_accepted"
+                }
+              },
+              "queryRef": "threshold_summary.accuracy_accepted",
+              "nativeQueryRef": "accuracy_accepted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_summary"
+                    }
+                  },
+                  "Property": "total_cost"
+                }
+              },
+              "queryRef": "threshold_summary.total_cost",
+              "nativeQueryRef": "total_cost"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_summary"
+                    }
+                  },
+                  "Property": "cost_per_1000"
+                }
+              },
+              "queryRef": "threshold_summary.cost_per_1000",
+              "nativeQueryRef": "cost_per_1000"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_summary"
+                    }
+                  },
+                  "Property": "savings_vs_trust_all_pct"
+                }
+              },
+              "queryRef": "threshold_summary.savings_vs_trust_all_pct",
+              "nativeQueryRef": "savings_vs_trust_all_pct"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'A table'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Optimal Threshold & Cost Savings'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "68b9883209c39a316a1b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_summary"
+              }
+            },
+            "Property": "model"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "19c5e40b00465b87078e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_summary"
+              }
+            },
+            "Property": "optimal_threshold"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "196e0b55ed34d45a90e4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_summary"
+              }
+            },
+            "Property": "coverage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d5966ad603e0d3720da5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_summary"
+              }
+            },
+            "Property": "review_rate"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "06b782754970bccd92db",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_summary"
+              }
+            },
+            "Property": "accuracy_accepted"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "bb3899c3ea6942557328",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_summary"
+              }
+            },
+            "Property": "total_cost"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "905b95d50498d3ad2d8d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_summary"
+              }
+            },
+            "Property": "cost_per_1000"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "47882993d665c83605c0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_summary"
+              }
+            },
+            "Property": "savings_vs_trust_all_pct"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

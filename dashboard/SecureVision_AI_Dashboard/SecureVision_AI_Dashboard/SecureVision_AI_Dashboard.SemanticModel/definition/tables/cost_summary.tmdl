@@ -1,0 +1,77 @@
+table cost_summary
+	lineageTag: 80938593-b5c7-42da-a0a6-0a278e44edbd
+
+	column model
+		dataType: string
+		lineageTag: 2d01abf9-bf7e-438f-89cf-54f2bd229b0f
+		summarizeBy: none
+		sourceColumn: model
+
+		annotation SummarizationSetBy = Automatic
+
+	column split
+		dataType: string
+		lineageTag: 0158660b-a183-4b9c-a859-872246bc1a57
+		summarizeBy: none
+		sourceColumn: split
+
+		annotation SummarizationSetBy = Automatic
+
+	column sample_count
+		dataType: double
+		lineageTag: 0f83ef55-bc9d-44b3-835d-50ca735896be
+		summarizeBy: sum
+		sourceColumn: sample_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column incorrect_predictions
+		dataType: double
+		lineageTag: 97d48317-b588-4cfe-aa11-ec047039e9d8
+		summarizeBy: sum
+		sourceColumn: incorrect_predictions
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_cost
+		dataType: double
+		lineageTag: ba9e4897-963a-4185-ac1c-e65752224c8e
+		summarizeBy: sum
+		sourceColumn: total_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_cost_per_sample
+		dataType: double
+		lineageTag: 55e2e3bf-efc6-40ed-9c22-434712f61662
+		summarizeBy: sum
+		sourceColumn: average_cost_per_sample
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition cost_summary = m
+		mode: import
+		source =
+				let
+									Source = Table.FromRows({
+				                    {"baseline_cnn", "test", 10000, 2025, 2025.0, 0.2025},
+				                    {"resnet18", "test", 10000, 959, 959.0, 0.0959},
+				                    {"baseline_cnn", "validation", 5000, 1037, 1037.0, 0.2074},
+				                    {"resnet18", "validation", 5000, 454, 454.0, 0.0908}
+									}, {"model", "split", "sample_count", "incorrect_predictions", "total_cost", "average_cost_per_sample"}),
+									#"Changed Type" = Table.TransformColumnTypes(Source, {{"model", type text}, {"split", type text}, {"sample_count", type number}, {"incorrect_predictions", type number}, {"total_cost", type number}, {"average_cost_per_sample", type number}})
+								in
+									#"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
