@@ -1,8 +1,0 @@
-{
-  "version": "4.0",
-  "datasetReference": {
-    "byPath": {
-      "path": "../SecureVision_AI_Dashboard.SemanticModel"
-    }
-  }
-}

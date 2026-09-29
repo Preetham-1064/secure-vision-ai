@@ -1,3 +1,0 @@
-model,tuning_split,reporting_split,optimal_threshold,samples_reported,coverage,review_rate,accuracy_accepted,errors_accepted,errors_caught_by_review,total_cost,cost_per_1000,trust_all_cost_per_1000,review_all_cost_per_1000,savings_vs_trust_all_pct,savings_vs_review_all_pct,best_possible_threshold_on_report_split
-baseline_cnn,validation,test,0.96,10000,0.3619,0.6381,0.9853550704614534,53,1972,7176.0,717.6,3037.5,1000.0,76.37530864197531,28.24,0.95
-resnet18,validation,test,0.98,10000,0.7268,0.2732,0.9836268574573472,119,840,4517.0,451.7,1438.5,1000.0,68.59923531456377,54.83,0.99

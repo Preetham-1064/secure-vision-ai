@@ -1,5 +1,0 @@
-model,split,sample_count,incorrect_predictions,total_cost,average_cost_per_sample
-baseline_cnn,test,10000,2025,2025.0,0.2025
-resnet18,test,10000,959,959.0,0.0959
-baseline_cnn,validation,5000,1037,1037.0,0.2074
-resnet18,validation,5000,454,454.0,0.0908
